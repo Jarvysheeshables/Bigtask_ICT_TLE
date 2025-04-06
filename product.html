@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - 4FLO CLothing Store</title>
+  <link rel="stylesheet" href="styles.css"> 
+  <style>
+   body {
+      margin: 0;
+      padding: 0;
+      position: relative; 
+      min-height: 100vh; 
+      background-color: #FFFFFF;
+    }
+
+    header {
+      background-color: #808080;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      text-align: center;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    nav ul li a.active {
+      color: green;
+    }
+
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .product-item {
+      width: 250px;
+      margin: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+      background-color: #808080; 
+      color: #D3D3D3;
+    }
+
+    .product-item img {
+      width: 100%;
+      height: auto;
+    }
+
+    .add-to-cart {
+      background-color: #B2BEB5;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-to-cart:hover {
+      background-color: #9FE2BF;
+    }
+
+    .checkout-btn {
+      background-color: #5F8575;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      position: fixed;
+      top: 170px;
+      right: 20px;
+      z-index: 999; 
+    }
+
+    .checkout-btn:hover {
+      background-color: #B2BEB5;
+    }
+
+    .receipt-container {
+      background-color: #E5E4E2; 
+      padding: 20px;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>4FLO Clothing Store</h1>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+	 <li><a href="about.html">About Us</a></li>
+    <li><a href="products.html"class="active">Products</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+    <li><a href="registration.html">Registration</a></li>
+  </ul>
+</nav>
+
+<section class="product-container">
+  <div class="product-item">
+    <img src="4flo5.jpg" alt="Product 1">
+    <h3>Product 1</h3>
+    <p>TR4P Shiesty</p>
+    <p>$350</p>
+    <button class="add-to-cart" onclick="addToCart('Product 1', 350, 1)">Add to Cart</button> 
+  </div>
+  <div class="product-item">
+    <img src="C:\Users\Zapico\Downloads\tr4ptee.jpg" alt="Product 2">
+    <h3>Product 2</h3>
+    <p>TR4P Tee</p>
+    <p>$444</p>
+    <button class="add-to-cart" onclick="addToCart('Product 2', 444, 1)">Add to Cart</button> 
+  </div>
+  <div class="product-item">
+    <img src="C:\Users\Zapico\Downloads\tr4pboisclub.jpg" alt="Product 3">
+    <h3>Product 3</h3>
+    <p>TR4P Hoodie</p>
+    <p>$666</p>
+    <button class="add-to-cart" onclick="addToCart('Product 3', 666, 1)">Add to Cart</button> 
+  </div>
+ 
+  
+</section>
+
+<button class="checkout-btn" onclick="checkout()">Checkout</button> 
+
+<div class="receipt-container" id="receipt"></div> 
+
+<script>
+  // JavaScript
+  let cartItems = []; 
+
+  function addToCart(productName, price, quantity) {
+    let existingItem = cartItems.find(item => item.name === productName);
+
+    if (existingItem) {
+        existingItem.quantity += quantity;
+    } else {
+        cartItems.push({ name: productName, price: price, quantity: quantity });
+    }
+	
+   
+  function quantityToText(quantity) {
+    if (quantity === 1) {
+        return "one";
+    } else if (quantity === 2) {
+        return "two";
+    } else if (quantity === 3) {
+        return "three";
+    } else {
+        return quantity.toString();
+    }
+  }
+
+	alert(quantityToText(quantity) + " " + productName + " added to cart!");
+
+
+  }
+
+  function checkout() {
+    generateReceipt();
+  }
+
+  function generateReceipt() {
+    let total = 0;
+    let receiptHTML = "<h2>Receipt</h2>";
+    receiptHTML += "";
+    cartItems.forEach(item => {
+      receiptHTML += "<li>" + item.name + " - Quantity: " + item.quantity + " - $" + (item.price * item.quantity) + "</li>";
+      total += item.price * item.quantity;
+    });
+    receiptHTML += "";
+    receiptHTML += "<h3>Total: $" + total + "</h3>";
+    document.getElementById("receipt").innerHTML = receiptHTML;
+  }
+</script>
+
+</body>
+</html>
